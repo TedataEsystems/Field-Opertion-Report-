@@ -54,7 +54,7 @@
             <input formControlName="zoneName" matInput placeholder="zone Name*" readonly>
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
-       
+
           <mat-form-field>
             <mat-select class="select"  formControlName="operatorIds" placeholder="operator Name*">
               <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #operatorSearch (input)="onOperatorsInputChange()" >
@@ -65,7 +65,7 @@
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
 
-         
+
         </div>
       </mat-grid-tile>
       <mat-grid-tile>
@@ -127,7 +127,7 @@
 
           <mat-form-field>
             <input [ngxMatDatetimePicker]="closedDate" (dateChange)="handleclosedDateChange($event)"  formControlName="closedDate" matInput placeholder="closed Date*" readonly>
-           // [enableMeridian]="true"
+            <!-- [enableMeridian]="true" -->
             <mat-datepicker-toggle matSuffix [for]="$any(closedDate)" ></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #closedDate   >
             </ngx-mat-datetime-picker>
@@ -146,7 +146,7 @@
   </form>
   <!-- [disabled]="form.invalid" -->
 </mat-card>
-  
+
 <app-loader *ngIf="loading">
 </app-loader>
 

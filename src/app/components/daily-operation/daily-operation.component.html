@@ -9,26 +9,15 @@
   </mat-expansion-panel-header>
   <mat-divider></mat-divider>
   <form [formGroup]="form" class="form-normal" (submit)="AdvancedSearch()">
-    <mat-grid-list cols="2" rowHeight="400px">
+    <mat-grid-list cols="4" rowHeight="230px">
       <mat-grid-tile>
         <div class="controles-container">
 
-          <mat-form-field>
+          <mat-form-field >
             <input formControlName="complaintNumber" matInput placeholder="complaint Number*">
           </mat-form-field>
 
-          <mat-form-field>
-            <input formControlName="PSDID" matInput placeholder="PSDID*">
-          </mat-form-field>
-
-          <mat-form-field>
-            <input formControlName="circuitID" matInput placeholder="circuit ID*">
-          </mat-form-field>
-          <mat-form-field>
-            <input formControlName="customerName" matInput placeholder="customer Name*">
-          </mat-form-field>
-          
-          <mat-form-field>
+          <mat-form-field >
             <mat-select formControlName="popNameIds" placeholder="pop Name*"
               (selectionChange)="OnChangePopName($event)">
               <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #popNameSearch (input)="onPopNameInputChange()" >
@@ -37,30 +26,7 @@
               </ng-container>
             </mat-select>
           </mat-form-field>
-
-          <mat-form-field>
-            <input formControlName="zoneName" matInput placeholder="zone Name*" readonly>
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-select formControlName="operatorIds" placeholder="operator Name*">
-              <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #operatorSearch (input)="onOperatorsInputChange()" >
-              <ng-container *ngFor="let operatorIds of operators">
-                <mat-option value="{{operatorIds.id}}">{{operatorIds.name}}</mat-option>
-              </ng-container>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <input formControlName="assignedTo" matInput placeholder="Assigned To*">
-          </mat-form-field>
-       
-
-
-        </div>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <div class="controles-container">
-          <mat-form-field>
+          <mat-form-field >
             <mat-select formControlName="techNameIds" placeholder="tech Name*">
               <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #techNameSearch (input)="onTechNameInputChange()" >
               <ng-container *ngFor="let techNameIds of techNames">
@@ -69,7 +35,31 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field >
+            <input [ngxMatDatetimePicker]="createdDateFrom" formControlName="createdDateFrom" matInput
+              placeholder="created From*" readonly>
+            <mat-datepicker-toggle matSuffix [for]="$any(createdDateFrom)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #createdDateFrom [enableMeridian]="true" >
+            </ngx-mat-datetime-picker>
+          </mat-form-field>
+
+
+
+
+
+
+
+        </div>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field >
+            <input formControlName="PSDID" matInput placeholder="PSDID*">
+          </mat-form-field>
+          <mat-form-field >
+            <input formControlName="zoneName" matInput placeholder="zone Name*" readonly>
+          </mat-form-field>
+          <mat-form-field >
             <mat-select formControlName="remedyActionIds" placeholder="Remedy Action Name*">
               <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #remedyActionsSearch (input)="onRemedyActionInputChange()" >
               <ng-container *ngFor="let remedyActionIds of remedyActions">
@@ -77,18 +67,66 @@
               </ng-container>
             </mat-select>
           </mat-form-field>
-
-          <mat-form-field>
-            <mat-select formControlName="transmissionMediaIds" placeholder="transmission Media Name*">
-              <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #transmissionMediaSearch (input)="onTransmissionMediaInputChange()" >
-              <ng-container *ngFor="let transmissionMediaIds of transmissionMedia">
-                <mat-option value="{{transmissionMediaIds.id}}">{{transmissionMediaIds.name}}</mat-option>
-              </ng-container>
-            </mat-select>
+          <mat-form-field >
+            <input [ngxMatDatetimePicker]="createdDateTo" formControlName="createdDateTo" matInput
+              placeholder="created To*" readonly>
+            <mat-datepicker-toggle matSuffix [for]="$any(createdDateTo)"></mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #createdDateTo [enableMeridian]="true" >
+            </ngx-mat-datetime-picker>
           </mat-form-field>
 
 
-          <mat-form-field>
+
+
+
+
+
+
+          </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="controles-container">
+              <mat-form-field >
+                <input formControlName="circuitID" matInput placeholder="circuit ID*">
+              </mat-form-field>
+              <mat-form-field >
+                <mat-select formControlName="operatorIds" placeholder="operator Name*">
+                  <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #operatorSearch (input)="onOperatorsInputChange()" >
+                  <ng-container *ngFor="let operatorIds of operators">
+                    <mat-option value="{{operatorIds.id}}">{{operatorIds.name}}</mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field >
+                <mat-select formControlName="transmissionMediaIds" placeholder="transmission Media Name*">
+                  <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #transmissionMediaSearch (input)="onTransmissionMediaInputChange()" >
+                  <ng-container *ngFor="let transmissionMediaIds of transmissionMedia">
+                    <mat-option value="{{transmissionMediaIds.id}}">{{transmissionMediaIds.name}}</mat-option>
+                  </ng-container>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field >
+                <input [ngxMatDatetimePicker]="closedDateFrom" formControlName="closedDateFrom" matInput placeholder="closed  From*" readonly>
+                <mat-datepicker-toggle matSuffix [for]="$any(closedDateFrom)"></mat-datepicker-toggle>
+                <ngx-mat-datetime-picker #closedDateFrom [enableMeridian]="true" >
+                </ngx-mat-datetime-picker>
+              </mat-form-field>
+
+
+              </div>
+              </mat-grid-tile>
+      <mat-grid-tile>
+        <div class="controles-container">
+          <mat-form-field >
+            <input formControlName="customerName" matInput placeholder="customer Name*">
+          </mat-form-field>
+          <mat-form-field >
+            <input formControlName="assignedTo" matInput placeholder="Assigned To*">
+          </mat-form-field>
+
+
+
+          <mat-form-field >
             <mat-select formControlName="statusIds" placeholder="status *">
               <input type="text" autocomplete="off" matInput class="p-2" placeholder="status name" #statusNameSearch (input)="onStatusInputChange()" >
               <ng-container *ngFor="let statusIds of status">
@@ -98,30 +136,9 @@
           </mat-form-field>
 
 
-          <mat-form-field>
-            <input [ngxMatDatetimePicker]="createdDateFrom" formControlName="createdDateFrom" matInput
-              placeholder="created From*" readonly>
-            <mat-datepicker-toggle matSuffix [for]="$any(createdDateFrom)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #createdDateFrom [enableMeridian]="true" >
-            </ngx-mat-datetime-picker>
-          </mat-form-field>
 
-          <mat-form-field>
-            <input [ngxMatDatetimePicker]="createdDateTo" formControlName="createdDateTo" matInput
-              placeholder="created To*" readonly>
-            <mat-datepicker-toggle matSuffix [for]="$any(createdDateTo)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #createdDateTo [enableMeridian]="true" >
-            </ngx-mat-datetime-picker>
-          </mat-form-field>
 
-          <mat-form-field>
-            <input [ngxMatDatetimePicker]="closedDateFrom" formControlName="closedDateFrom" matInput placeholder="closed  From*" readonly>
-            <mat-datepicker-toggle matSuffix [for]="$any(closedDateFrom)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #closedDateFrom [enableMeridian]="true" >
-            </ngx-mat-datetime-picker>
-          </mat-form-field>
-
-          <mat-form-field>
+          <mat-form-field >
             <input [ngxMatDatetimePicker]="closedDateTo" formControlName="closedDateTo" matInput placeholder="closed  To*" readonly>
             <mat-datepicker-toggle matSuffix [for]="$any(closedDateTo)"></mat-datepicker-toggle>
             <ngx-mat-datetime-picker #closedDateTo [enableMeridian]="true" >
@@ -230,7 +247,7 @@
     <span>Loading Data ...</span>
     <mat-progress-bar class="example-margin"  mode="buffer" value="50">
 </mat-progress-bar>
-    
+
   </div>
 
   <ng-template #table>
@@ -240,7 +257,7 @@
 
         <ng-container matColumnDef="id">
           <mat-header-cell *matHeaderCellDef mat-sort-header hidden> ID. </mat-header-cell>
-          <mat-cell *matCellDef="let element , let row" data-label="id" [ngClass]="{'highlight' : row.isToLate}" hidden>
+          <mat-cell *matCellDef="let element , let row" data-label="id" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}" hidden>
             {{element.id}} </mat-cell>
         </ng-container>
 
@@ -248,15 +265,15 @@
           <mat-header-cell *matHeaderCellDef>
             <mat-checkbox (change)="onselectcheckall($event)">All</mat-checkbox>
           </mat-header-cell>
-          <mat-cell *matCellDef="let row" data-label="All" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let row" data-label="All" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <mat-checkbox [checked]="isall" (change)="onselectcheck($event,row)"></mat-checkbox>
           </mat-cell>
         </ng-container>
-  
+
         <ng-container matColumnDef="complaintNumber">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Complaint Number </mat-header-cell>
           <mat-cell *matCellDef="let element, let row" data-label="complaintNumber"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.complaintNumber}}
             </ng-container>
@@ -272,7 +289,7 @@
 
         <ng-container matColumnDef="psdid">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> PSD ID </mat-header-cell>
-          <mat-cell *matCellDef="let element, let row" data-label="psdid" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element, let row" data-label="psdid" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.psdid}}
             </ng-container>
@@ -287,7 +304,7 @@
 
         <ng-container matColumnDef="circuitID">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Circuit ID </mat-header-cell>
-          <mat-cell *matCellDef="let element , let row" data-label="circuitID" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element , let row" data-label="circuitID" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.circuitID}}
             </ng-container>
@@ -303,7 +320,7 @@
         <ng-container matColumnDef="customerName">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Customer Name </mat-header-cell>
           <mat-cell *matCellDef="let element, let row" data-label="customerName"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.customerName}}
             </ng-container>
@@ -318,13 +335,13 @@
 
         <ng-container matColumnDef="_PopName">
           <mat-header-cell *matHeaderCellDef mat-sort-header><b> Pop Name </b> </mat-header-cell>
-          <mat-cell *matCellDef="let element , let row" data-label="_PopName" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element , let row" data-label="_PopName" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             {{element._PopName}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="zoneName">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Zone Name </mat-header-cell>
-          <mat-cell *matCellDef="let element , let row" data-label="zoneName" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element , let row" data-label="zoneName" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.zoneName}}
             </ng-container>
@@ -336,11 +353,11 @@
             </ng-container>
           </mat-cell>
         </ng-container>
-     
+
         <ng-container matColumnDef="createdDate">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> created Date </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="createdDate"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.createdDate | date:'mediumDate'}}
             </ng-container>
@@ -358,7 +375,7 @@
         <ng-container matColumnDef="createdTime">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> creation Time </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="createdTime"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.createdTime}}
             </ng-container>
@@ -376,7 +393,7 @@
         <ng-container matColumnDef="closedDate">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> closed Date </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="closedDate"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
 
             <ng-container *ngIf="!editdisabled">
               {{element.closedDate | date:'mediumDate'}}
@@ -395,7 +412,7 @@
         <ng-container matColumnDef="closedTime">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> closed Time </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="closedTime"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
 
             <ng-container *ngIf="!editdisabled">
               {{element.closedTime }}
@@ -413,10 +430,10 @@
 
         <ng-container matColumnDef="sla">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> SLA </mat-header-cell>
-          <mat-cell *matCellDef="let element , let row" data-label="sla" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element , let row" data-label="sla" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
 
             <ng-container *ngIf="!editdisabled">
-              {{element.sla | slaFormat }}  
+              {{element.sla | slaFormat }}
             </ng-container>
             <ng-container *ngIf="editdisabled">
               <mat-form-field hideRequiredMarker="false" appearance="legacy">
@@ -430,7 +447,7 @@
         <ng-container matColumnDef="_OperatorName">
           <mat-header-cell *matHeaderCellDef mat-sort-header><b> operator Name </b> </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="_OperatorName"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             {{element._OperatorName}}
           </mat-cell>
         </ng-container>
@@ -438,7 +455,7 @@
         <ng-container matColumnDef="assignedTo">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Assigned To </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="assignedTo"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.assignedTo}}
             </ng-container>
@@ -453,7 +470,7 @@
 
         <ng-container matColumnDef="_TechName">
           <mat-header-cell *matHeaderCellDef mat-sort-header><b> tech Name</b> </mat-header-cell>
-          <mat-cell *matCellDef="let element , let row" data-label="_TechName" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element , let row" data-label="_TechName" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             {{element._TechName}}
           </mat-cell>
         </ng-container>
@@ -461,14 +478,14 @@
         <ng-container matColumnDef="_RemedyActionName">
           <mat-header-cell *matHeaderCellDef mat-sort-header><b> remedy Action</b> </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="_RemedyActionName"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             {{element._RemedyActionName}}
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="notes">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Notes </mat-header-cell>
-          <mat-cell *matCellDef="let element ,let row" data-label="notes" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element ,let row" data-label="notes" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.notes}}
             </ng-container>
@@ -484,7 +501,8 @@
         <ng-container matColumnDef="_TransmissionMediaName">
           <mat-header-cell *matHeaderCellDef mat-sort-header><b> transmission Media </b> </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="_TransmissionMediaName"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,
+            'green' : row._StatusName=='Closed'}">
             {{element._TransmissionMediaName}}
           </mat-cell>
         </ng-container>
@@ -492,14 +510,16 @@
         <ng-container matColumnDef="_StatusName">
           <mat-header-cell *matHeaderCellDef mat-sort-header><b> status </b> </mat-header-cell>
           <mat-cell *matCellDef="let element , let row" data-label="_StatusName"
-            [ngClass]="{'highlight' : row.isToLate}">
+            [ngClass]="{'highlight' : row.isToLate,
+                         'green' : row._StatusName=='Closed','fontcolor':row._StatusName=='Closed'}">
             {{element._StatusName}}
           </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="updateDate">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Update Date </mat-header-cell>
-          <mat-cell *matCellDef="let element ,let row" data-label="updateDate" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element ,let row" data-label="updateDate" [ngClass]="{'highlight' : row.isToLate,
+          'green' : row._StatusName=='Closed'}">
             <ng-container *ngIf="!editdisabled">
               {{element.updateDate | date:'mediumDate'}}
             </ng-container>
@@ -514,7 +534,7 @@
 
         <ng-container matColumnDef="createdBy">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Created By </mat-header-cell>
-          <mat-cell *matCellDef="let element , let row" data-label="createdBy" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element , let row" data-label="createdBy" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
 
             <ng-container *ngIf="!editdisabled">
               {{element.createdBy}}
@@ -530,7 +550,7 @@
 
         <ng-container matColumnDef="updatedBy">
           <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Updated By </mat-header-cell>
-          <mat-cell *matCellDef="let element,let row" data-label="updatedBy" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let element,let row" data-label="updatedBy" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
 
             <ng-container *ngIf="!editdisabled">
               {{element.updatedBy}}
@@ -552,12 +572,12 @@
 
         <ng-container matColumnDef="flag">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Open 2 hours ago </mat-header-cell>
-          <mat-cell *matCellDef="let element , let row" data-label="Open" [ngClass]="{'highlight' : row.isToLate}"> <mat-icon class="text-danger" *ngIf="row.isToLate">notifications_active</mat-icon> </mat-cell>
+          <mat-cell *matCellDef="let element , let row" data-label="Open" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}"> <mat-icon class="text-danger" *ngIf="row.isToLate">notifications_active</mat-icon> </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="action">
           <mat-header-cell mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
-          <mat-cell *matCellDef="let row" data-label="action" [ngClass]="{'highlight' : row.isToLate}">
+          <mat-cell *matCellDef="let row" data-label="action" [ngClass]="{'highlight' : row.isToLate,'green' : row._StatusName=='Closed'}">
 
             <ng-container *ngIf="!editdisabled">
               <button mat-button class="text-success font-weight-bolder" (click)="editROw(row.id)">
@@ -585,13 +605,13 @@
           </mat-footer-cell>
 
         </ng-container>
-       
+
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource.data.length==0 && dataSource !=null)}"></mat-footer-row>
-         
-       
+
+
 
       </mat-table>
 

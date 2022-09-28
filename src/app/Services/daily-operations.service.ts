@@ -10,15 +10,15 @@ import { PaginatedResult, Pagination } from '../Model/pagination';
   providedIn: 'root'
 })
 export class DailyOperationsService {
-  url =  "http://172.29.29.8:2021/api/DailyOperation";
-  url3 = "https://localhost:44375/api/DailyOperation";
-  //url3 = "http://172.29.29.8:2031/api/DailyOperation";
+  // url =  "http://172.29.29.8:2021/api/DailyOperation";
+  // url3 = "https://localhost:44375/api/DailyOperation";
+  url3 = "http://172.29.29.8:2031/api/DailyOperation";
   paginatedResult : PaginatedResult<IdailyOperations[]> =new PaginatedResult<IdailyOperations[]>();
-  
+
   headers = new HttpHeaders({
     'Accept': 'application/json',
     'zumo-api-version': '2.0.0',
-    
+
 });
   constructor(private http: HttpClient) { }
 
@@ -73,20 +73,20 @@ export class DailyOperationsService {
 
   ExportEmptyExcel():Observable<Blob>{
     return this.http.get(`${this.url3}/DownloadEmptyExcel`,{responseType: 'blob',headers: this.headers});
-    
+
   }
-  
+
 public addFromFile(file : any)
 {
   return this.http.post<any>(this.url3 + '/AddExcelFile' , file , {headers : this.headers});
 }
 
 ExportExcelWithData():Observable<Blob>{
-  return this.http.get(`${this.url3}/DownloadAllDataOfExcel`,{responseType: 'blob',headers: this.headers}); 
+  return this.http.get(`${this.url3}/DownloadAllDataOfExcel`,{responseType: 'blob',headers: this.headers});
 }
 
 DownloadAllDisplayDataOfExcel():Observable<Blob>{
-  return this.http.get(`${this.url3}/DownloadAllDisplayDataOfExcel`,{responseType: 'blob',headers: this.headers}); 
+  return this.http.get(`${this.url3}/DownloadAllDisplayDataOfExcel`,{responseType: 'blob',headers: this.headers});
 }
 
 ExportExcelWithselectData(ids:string[]):Observable<Blob>{
@@ -104,7 +104,7 @@ GetPopNameByZoneId (zoneId : number): Observable<any> {
 
 chartData():Observable<any>
 {
- return this.http.get<any>(`${this.url3}/GetflowChartData`) ; 
+ return this.http.get<any>(`${this.url3}/GetflowChartData`) ;
 }
 
 AdvancedSearch(data: IdailyOperationsSearch): Observable<any> {

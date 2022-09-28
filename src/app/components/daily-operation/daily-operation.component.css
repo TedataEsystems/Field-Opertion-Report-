@@ -8,13 +8,13 @@
   width: 25% !important;
   /* padding:.75em .75em 0 .75em !important; */
   position: relative;
-  
+
   background-color: #f5f5ec !important;
   height: 51.5px;
   box-shadow: inset 2px 2px 6px #d4d4b6, inset -2px -2px 6px #d4d4b6 !important;
 
 
-} 
+}
 .mat-form-field-appearance-fill .mat-form-field-flex {
   background-color: rgb(196 196 162 / 57%);
 }
@@ -22,10 +22,21 @@
     text-shadow: 3px 3px 5px #40403e;
   } */
   .highlight{
-    background-color : #e9eae6!important ;
-    
+    background-color : #eeeeee;
+
   }
-  
+
+.green{
+  background-color: #0ebe21 !important;
+  color: #fff !important;
+
+}
+.fontcolor{
+  color: #0b630b !important;
+  font-size: 16px;
+  font-weight: bold;
+
+}
   /* .mat-cell:nth-child(1),.mat-header-cell:nth-child(1),.mat-cell:nth-child(2),.mat-header-cell:nth-child(2){
     word-wrap: break-word !important;
   white-space: unset !important;
@@ -40,14 +51,14 @@
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-   
+
   } */
   .mat-icon.beig{
-    text-shadow: 0px 0px 0px transparent; 
+    text-shadow: 0px 0px 0px transparent;
   }
   .mat-icon{
     text-shadow: 3px 3px 5px #40403e;
-    
+
   }
   .x{
     color: #001924;
@@ -64,14 +75,14 @@
 .separator{
   color:#cad1d3;
   font-size: 13px;
- 
+
 }
 .clear{
   padding: 8px 16px;
   border-radius: 3px;
 }
 .serch,.clear{
-  
+
   font-size: 14px;
   border: 0;
 }
@@ -87,7 +98,7 @@
 .option:hover{
   cursor: pointer;
   color: #cad1d3;
-  
+
 }
 .input-group{
   height: 35px;
@@ -138,13 +149,13 @@ li:last-of-type{
 #uploadFile {
   top: 0px;
   left: 0px;
-  width: 100%;    
+  width: 100%;
   z-index: 9;
   opacity: 0;
   height: 100%;
   cursor: pointer;
   position: absolute;
-  
+
 }
 #upload{
   background-color: transparent;
@@ -164,13 +175,13 @@ li:last-of-type{
 /* #uploadFile {
     top: 0px;
     left: 0px;
-    width: 100%;    
+    width: 100%;
     z-index: 9;
     opacity: 0;
     height: 100%;
     cursor: pointer;
     position: absolute;
-    
+
   }
   #upload{
     background-color: transparent;
@@ -181,14 +192,14 @@ li:last-of-type{
     color: #252131;
     font-size: 20px;
     font-weight: 700;
-  
+
   } */
   .mat-button{
     min-width: 24px !important;
 }
 
 
-  
+
 .btn-color{
     color: #fff;
     background-color: #cad1d3;
@@ -197,7 +208,7 @@ li:last-of-type{
    }
    .field{
      padding: 10px 15px;
-  
+
    }
    .data{
     border: 1px dashed #3a5a81;
@@ -223,12 +234,12 @@ li:last-of-type{
     background: #cad1d3;
     border-radius: 2px;
     z-index: 1;
-    
+
     color: #fff;
 }
 
 
- 
+
  mat-cell:nth-child(2), mat-header-cell:nth-child(2){
   word-wrap: break-word !important;
   white-space: unset !important;
@@ -238,7 +249,8 @@ li:last-of-type{
   word-wrap: break-word;
 padding: 0 10px !important;
   word-break: break-word;
-
+  height: 48px;
+  overflow-y: auto;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
@@ -247,7 +259,7 @@ padding: 0 10px !important;
 
  }
 
- 
+
 
 
 mat-cell, mat-header-cell{
@@ -259,7 +271,27 @@ mat-cell, mat-header-cell{
   word-wrap: break-word;
 
   word-break: break-word;
+  height: 48px;
+  overflow-y: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  border-bottom:1px solid rgba(0,0,0,.12);
 
+ }
+ mat-cell:nth-child(6),mat-header-cell:nth-child(6),
+ mat-cell:nth-child(18),mat-header-cell:nth-child(18){
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 18% !important;
+  width: 18% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+padding: 0 10px !important;
+  word-break: break-word;
+height: 48px;
+overflow-y: auto;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
@@ -269,13 +301,13 @@ mat-cell, mat-header-cell{
  }
  mat-header-cell{
   background-color: #cad1d3 ;/*#a8a8a8*/
- } 
+ }
 
- 
+
  mat-header-row {
-   
+
   min-height: 50px !important;
- 
+
 }
 
 .mat-radio-button ~ .mat-radio-button {
@@ -296,20 +328,20 @@ mat-cell, mat-header-cell{
   width: 5px;
   height: 7px;
   }
-  
+
   /* Track */
   ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 15px #879092 !important; 
+  box-shadow: inset 0 0 15px #879092 !important;
   border-radius: 15px;
   }
-  
+
   /* Handle */
   ::-webkit-scrollbar-thumb {
-  background: #012535; 
+  background: #012535;
   border-radius: 20px;
   }
-  
+
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-  background: #012535; 
+  background: #012535;
   }
