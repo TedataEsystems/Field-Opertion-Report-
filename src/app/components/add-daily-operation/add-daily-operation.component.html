@@ -105,7 +105,7 @@
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
           <mat-form-field>
-            <mat-select class="select" formControlName="statusIds" placeholder="status *" >
+            <mat-select class="select"  formControlName="statusIds" placeholder="status *" >
               <input type="text" autocomplete="off" matInput class="p-2" placeholder="status name" #statusNameSearch (input)="onStatusInputChange()" >
               <ng-container *ngFor="let statusIds of status">
                 <mat-option value="{{statusIds.id}}">{{statusIds.name}}</mat-option>

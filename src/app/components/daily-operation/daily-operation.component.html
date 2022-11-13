@@ -39,7 +39,7 @@
             <input [ngxMatDatetimePicker]="createdDateFrom" formControlName="createdDateFrom" matInput
               placeholder="created From*" readonly>
             <mat-datepicker-toggle matSuffix [for]="$any(createdDateFrom)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #createdDateFrom [enableMeridian]="true" >
+            <ngx-mat-datetime-picker #createdDateFrom > //[enableMeridian]="true"
             </ngx-mat-datetime-picker>
           </mat-form-field>
 
@@ -71,7 +71,7 @@
             <input [ngxMatDatetimePicker]="createdDateTo" formControlName="createdDateTo" matInput
               placeholder="created To*" readonly>
             <mat-datepicker-toggle matSuffix [for]="$any(createdDateTo)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #createdDateTo [enableMeridian]="true" >
+            <ngx-mat-datetime-picker #createdDateTo>// [enableMeridian]="true" 
             </ngx-mat-datetime-picker>
           </mat-form-field>
 
@@ -108,7 +108,7 @@
               <mat-form-field >
                 <input [ngxMatDatetimePicker]="closedDateFrom" formControlName="closedDateFrom" matInput placeholder="closed  From*" readonly>
                 <mat-datepicker-toggle matSuffix [for]="$any(closedDateFrom)"></mat-datepicker-toggle>
-                <ngx-mat-datetime-picker #closedDateFrom [enableMeridian]="true" >
+                <ngx-mat-datetime-picker #closedDateFrom >//[enableMeridian]="true" 
                 </ngx-mat-datetime-picker>
               </mat-form-field>
 
@@ -141,7 +141,7 @@
           <mat-form-field >
             <input [ngxMatDatetimePicker]="closedDateTo" formControlName="closedDateTo" matInput placeholder="closed  To*" readonly>
             <mat-datepicker-toggle matSuffix [for]="$any(closedDateTo)"></mat-datepicker-toggle>
-            <ngx-mat-datetime-picker #closedDateTo [enableMeridian]="true" >
+            <ngx-mat-datetime-picker #closedDateTo  >//[enableMeridian]="true"
             </ngx-mat-datetime-picker>
           </mat-form-field>
 

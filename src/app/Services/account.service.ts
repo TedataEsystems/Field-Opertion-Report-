@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Iloginview } from '../Model/Iloginview';
 import { Iuser } from '../Model/Iuser';
 
@@ -8,24 +9,16 @@ import { Iuser } from '../Model/Iuser';
   providedIn: 'root'
 })
 export class AccountService {
-  url =  "http://172.29.29.8:2021/api/account";
-  url2 =  "https://localhost:44375/api/account";
-  url3 =  "http://172.29.29.8:2031/api/account";
+  baseUrl = `${environment.apiUrl}account`;
 
-constructor(private http: HttpClient ) { }
+  constructor(private http: HttpClient) { }
 
-login(data:Iloginview ):Observable<Iuser>
-{
-  
-  
-  return this.http.post<Iuser>(`${this.url3}/login`,data);
-  
-}
+  login(data: Iloginview): Observable<Iuser> {
+    return this.http.post<Iuser>(`${this.baseUrl}/login`, data);
+  }
 
 
-logout(): Observable<any> {
-  return this.http.get<any>(`${this.url3}/Logout`);
-}
-
-
+  logout(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/Logout`);
+  }
 }

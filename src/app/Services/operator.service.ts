@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Ioperator } from '../Model/Ioperator';
 import { PaginationService } from './pagination.service';
 
@@ -10,9 +11,7 @@ import { PaginationService } from './pagination.service';
 })
 export class OperatorService {
   private headers = new HttpHeaders();
-  url =  "http://172.29.29.8:2021/api/Operator";
-  url2="https://localhost:44375/api/Operator" ;
-  url3 =  "http://172.29.29.8:2031/api/Operator";
+  baseUrl = `${environment.apiUrl}Operator`;
   constructor(private http: HttpClient , private paginationService: PaginationService
     ) {
       this.headers = this.headers.set('content-type', 'application/json');
@@ -27,7 +26,7 @@ export class OperatorService {
         params = params.append('sortcolumn' , sortcolumn.toString());
         params = params.append('sortcolumndir' , sortcolumndir.toString());
       }
-      return this.http.get<any>(`${this.url3}`  , {observe:'response' , params}).pipe(
+      return this.http.get<any>(`${this.baseUrl}`  , {observe:'response' , params}).pipe(
         map(response => {
            return response.body ;
         })
@@ -40,19 +39,19 @@ export class OperatorService {
   
   insertOperator(data:Ioperator ):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/AddOperator`,data);  
+   return this.http.post<any>(`${this.baseUrl}/AddOperator`,data);  
   }
   updateOperator(data:Ioperator ):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/UpdateOperator`,data);  
+   return this.http.post<any>(`${this.baseUrl}/UpdateOperator`,data);  
   }
 
   deleteOperator(id:number):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/DeleteOperator`,id) ; 
+   return this.http.post<any>(`${this.baseUrl}/DeleteOperator`,id) ; 
   }
   nameIsalreadysign(name:string,id:number ):Observable<any>
   {
-   return this.http.get<any>(`${this.url3}/NameIsAlreadySigned/`+name+`/`+id);  
+   return this.http.get<any>(`${this.baseUrl}/NameIsAlreadySigned/`+name+`/`+id);  
   }
 }

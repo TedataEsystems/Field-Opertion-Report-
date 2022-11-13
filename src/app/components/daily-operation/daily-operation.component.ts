@@ -65,10 +65,10 @@ export class DailyOperationComponent implements OnInit {
   pageNumber = 1;
   pageSize = 25;
   pagination?: Pagination;
-  public colname: string = 'Id';
-  public coldir: string = 'asc';
-  sortColumnDef: string = "Id";
-  SortDirDef: string = 'asc';
+  public colname: string = 'createdDate';
+  public coldir: string = 'desc';
+  sortColumnDef: string = "createdDate";
+  SortDirDef: string = 'desc';
   searchData : string = '';
   form: FormGroup = new FormGroup({
     complaintNumber: new FormControl(''),
@@ -101,7 +101,7 @@ export class DailyOperationComponent implements OnInit {
   displayedColumns: string[] = [ 'id','all',  'complaintNumber', 'psdid', 'circuitID', 'customerName', '_PopName',
     'zoneName', 'createdDate', 'createdTime', 'closedDate', 'closedTime','sla','_OperatorName', 'assignedTo', '_TechName', '_RemedyActionName', 'notes', '_TransmissionMediaName',
     '_StatusName',   'updateDate', 'createdBy','updatedBy', 'isToLate','flag','action'];
-  dataSource = new MatTableDataSource<any>();
+  dataSource = new MatTableDataSource<any>([]);
   getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
     this.loader = true;
     if (this.displayAll) {
@@ -137,7 +137,7 @@ export class DailyOperationComponent implements OnInit {
       this._transmissionMedia = res.transmissionMedia as ItransmissionMedia[];
     });
     //this.loading = false;
-   setTimeout(()=> this.loader = false,2000);
+   setTimeout(()=> this.loader = false,0);
   }
   ngOnInit() {
     this.editUsr = 0;
@@ -238,7 +238,7 @@ export class DailyOperationComponent implements OnInit {
       this.dataSource.paginator = this.paginator as MatPaginator;
       this.dataSource.sort = this.sort as MatSort;
       //this.loader=false;
-      setTimeout(()=>this.loader=false ,3000 )
+      setTimeout(()=>this.loader=false ,0 )
     });
 
   }
@@ -522,7 +522,7 @@ export class DailyOperationComponent implements OnInit {
 
         setTimeout(() => {
           this.loading = false;
-        }, 1500)
+        }, 0)
         this.clearFields();
         //this.notificationService.success(':: Saved Successfully');
       }, error => {

@@ -58,7 +58,7 @@ export class EditDailyOpertionComponent implements OnInit {
     zoneName: new FormControl('',Validators.required),
     operatorIds: new FormControl('',Validators.required),
     techNameIds: new FormControl('',Validators.required),
-    remedyActionIds: new FormControl('',Validators.required),
+    remedyActionIds: new FormControl(''),
     notes: new FormControl(''),
     transmissionMediaIds: new FormControl('',Validators.required),
     statusIds: new FormControl('',Validators.required),
@@ -190,7 +190,7 @@ export class EditDailyOpertionComponent implements OnInit {
         this.onClose();
         setTimeout(()=>{
           this.loading=false;
-        },1500)
+        },0)
         this.notificationService.success(':: Successfully Updated');
       }, error => {
         setTimeout(()=>{

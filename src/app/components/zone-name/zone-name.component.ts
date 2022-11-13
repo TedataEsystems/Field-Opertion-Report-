@@ -67,7 +67,7 @@ export class ZoneNameComponent implements OnInit {
       this.dataSource._updateChangeSubscription();
       this.dataSource.paginator = this.paginator as MatPaginator;
     })
-    setTimeout(()=>this.loader = false,2000);
+    setTimeout(()=>this.loader = false,0);
   }
 
   ngOnInit(): void {
@@ -104,7 +104,7 @@ export class ZoneNameComponent implements OnInit {
       res => {
         setTimeout(() => {
           this.loader = false;
-        }, 1500)
+        }, 0)
         this.notificationService.success(':: Successfully Updated');
 
         this.LoadZoneName();
@@ -140,7 +140,7 @@ export class ZoneNameComponent implements OnInit {
         res => {
           setTimeout(() => {
             this.loader = false;
-          }, 1500)
+          }, 0)
           this.notificationService.success(':: Successfully Added');
           this.LoadZoneName();
           this.zoneName = '';

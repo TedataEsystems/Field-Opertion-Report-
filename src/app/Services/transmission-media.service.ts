@@ -2,15 +2,17 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { ItransmissionMedia } from '../Model/ItransmissionMedia';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TransmissionMediaService {
-  url =  "http://172.29.29.8:2021/api/TransmissionMedia";
-  url2="https://localhost:44375/api/TransmissionMedia" ;
-  url3 =  "http://172.29.29.8:2031/api/TransmissionMedia";
+ 
+
+  baseUrl = `${environment.apiUrl}TransmissionMedia`;
+
   constructor(private http: HttpClient) { }
 
 
@@ -23,7 +25,7 @@ export class TransmissionMediaService {
       params = params.append('sortcolumn' , sortcolumn.toString());
       params = params.append('sortcolumndir' , sortcolumndir.toString());
     }
-    return this.http.get<any>(`${this.url3}`  , {observe:'response' , params}).pipe(
+    return this.http.get<any>(`${this.baseUrl}`  , {observe:'response' , params}).pipe(
       map(response => {
          return response.body ;
       })
@@ -35,19 +37,19 @@ export class TransmissionMediaService {
   
   insertTransmissionMedia(data:ItransmissionMedia ):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/AddTransmissionMedia`,data);  
+   return this.http.post<any>(`${this.baseUrl}/AddTransmissionMedia`,data);  
   }
   updateTransmissionMedia(data:ItransmissionMedia ):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/UpdateTransmissionMedia`,data);  
+   return this.http.post<any>(`${this.baseUrl}/UpdateTransmissionMedia`,data);  
   }
 
   deleteTransmissionMedia(id:number):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/DeleteTransmissionMedia`,id) ; 
+   return this.http.post<any>(`${this.baseUrl}/DeleteTransmissionMedia`,id) ; 
   }
   nameIsalreadysign(name:string,id:number ):Observable<any>
   {
-   return this.http.get<any>(`${this.url3}/NameIsAlreadySigned/`+name+`/`+id);  
+   return this.http.get<any>(`${this.baseUrl}/NameIsAlreadySigned/`+name+`/`+id);  
   }
 }

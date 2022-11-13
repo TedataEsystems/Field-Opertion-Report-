@@ -72,6 +72,8 @@ export class PopNameComponent implements OnInit {
 getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
   this.loader = true;
   this.service.getPopName(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
+    debugger;
+    console.log(response)
     this.popNameModel = response?.data;
     this.popNameModel.length = response?.pagination.totalCount;
     this.dataSource = new MatTableDataSource<any>(this.popNameModel);
@@ -81,7 +83,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
   this.zoneNameService.getRequests().subscribe(res => {
     this.zoneNames = res  as IzoneName[];
   });
-  setTimeout(()=> this.loader =false,2000)
+  setTimeout(()=> this.loader =false,0)
 }
 
 
@@ -127,7 +129,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         res => {
           setTimeout(()=>{
             this.loader=false;
-          },1500)
+          },0)
           this.notificationService.success(':: Successfully Added');
           this.LoadPopName();
           this.popName = '';
@@ -149,7 +151,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         res => {
           setTimeout(()=>{
             this.loader=false;
-          },1500)
+          },0)
           this.notificationService.success(':: Successfully Updated');
           this.LoadPopName();
           this.popName = '';
@@ -203,7 +205,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       res => {
         setTimeout(()=>{
           this.loader=false;
-        },1500)
+        },0)
         this.notificationService.success(':: Successfully Updated');
         this.LoadPopName();
         this.popName = '';

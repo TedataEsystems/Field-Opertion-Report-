@@ -2,16 +2,15 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { IPopNameAbbreviations } from '../Model/IPopNameAbbreviations';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PopNameAbbreviationsService {
-  url =  "http://172.29.29.8:2021/api/PopNameAbbreviations";
-  url2 ="https://localhost:44375/api/PopNameAbbreviations" ;
-  url3 =  "http://172.29.29.8:2031/api/PopNameAbbreviations";
-
+  baseUrl = `${environment.apiUrl}PopNameAbbreviations`;
+  
   constructor(private http: HttpClient) { }
 
   getPopNameAbbreviations(page :number , itemPerPage :number){
@@ -20,13 +19,13 @@ export class PopNameAbbreviationsService {
       params = params.append('pageNumber' , page.toString());
       params = params.append('pageSize' , itemPerPage.toString());
     }
-    return this.http.get<any>(`${this.url3}`  , {observe:'response' , params}).pipe(
+    return this.http.get<any>(`${this.baseUrl}`  , {observe:'response' , params}).pipe(
       map(response => {
          return response.body ;
       })
     )
   }
   getRequests(): Observable<IPopNameAbbreviations[]>{
-    return this.http.get<IPopNameAbbreviations[]>(`${this.url3}`);
+    return this.http.get<IPopNameAbbreviations[]>(`${this.baseUrl}`);
   }
 }

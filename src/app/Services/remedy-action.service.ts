@@ -2,15 +2,16 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { IremedyAction } from '../Model/IremedyAction';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RemedyActionService {
-  url =  "http://172.29.29.8:2021/api/RemedyAction";
-  url2="https://localhost:44375/api/RemedyAction" ;
-  url3 =  "http://172.29.29.8:2031/api/RemedyAction";
+
+  baseUrl = `${environment.apiUrl}RemedyAction`;
+
   constructor(private http: HttpClient) { }
 
   getRemedyAction(PageNumber :number , PageSize :number , searchValue:string ,sortcolumn:string,sortcolumndir:string){
@@ -22,31 +23,31 @@ export class RemedyActionService {
       params = params.append('sortcolumn' , sortcolumn.toString());
       params = params.append('sortcolumndir' , sortcolumndir.toString());
     }
-    return this.http.get<any>(`${this.url3}`  , {observe:'response' , params}).pipe(
+    return this.http.get<any>(`${this.baseUrl}`  , {observe:'response' , params}).pipe(
       map(response => {
          return response.body ;
       })
     )
   }
   getRequests(): Observable<IremedyAction[]>{
-    return this.http.get<IremedyAction[]>(`${this.url3}`);
+    return this.http.get<IremedyAction[]>(`${this.baseUrl}`);
   }
   
   insertRemedyAction(data:IremedyAction ):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/AddRemedyAction`,data);  
+   return this.http.post<any>(`${this.baseUrl}/AddRemedyAction`,data);  
   }
   updateRemedyAction(data:IremedyAction ):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/UpdateRemedyAction`,data);  
+   return this.http.post<any>(`${this.baseUrl}/UpdateRemedyAction`,data);  
   }
 
   deleteRemedyAction(id:number):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/DeleteRemedyAction`,id) ; 
+   return this.http.post<any>(`${this.baseUrl}/DeleteRemedyAction`,id) ; 
   }
   nameIsalreadysign(name:string,id:number ):Observable<any>
   {
-   return this.http.get<any>(`${this.url3}/NameIsAlreadySigned/`+name+`/`+id);  
+   return this.http.get<any>(`${this.baseUrl}/NameIsAlreadySigned/`+name+`/`+id);  
   }
 }

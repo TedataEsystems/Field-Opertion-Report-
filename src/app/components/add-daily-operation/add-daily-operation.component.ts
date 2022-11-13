@@ -53,7 +53,7 @@ export class AddDailyOperationComponent implements OnInit {
     zoneName: new FormControl('',Validators.required),
     operatorIds: new FormControl('' ,Validators.required),
     techNameIds: new FormControl('' ,Validators.required),
-    remedyActionIds: new FormControl('' ,Validators.required),
+    remedyActionIds: new FormControl('' ),
     notes: new FormControl(''),
     transmissionMediaIds: new FormControl('' ,Validators.required),
     statusIds: new FormControl('' ,Validators.required),
@@ -75,6 +75,16 @@ export class AddDailyOperationComponent implements OnInit {
       this._techNames = res.techNames as ItechName[];
       this.transmissionMedia = res.transmissionMedia as ItransmissionMedia[];
       this._transmissionMedia = res.transmissionMedia as ItransmissionMedia[];
+
+      this.form.patchValue({
+        statusIds: this.status[0].id.toString()
+      })
+      this.form.patchValue({
+        remedyActionIds: this.remedyActions[0].id.toString()
+      })
+      this.form.patchValue({
+        techNameIds: this.techNames[0].id.toString()
+      })
     });
    
    
@@ -164,7 +174,7 @@ export class AddDailyOperationComponent implements OnInit {
         this.onClose();
         setTimeout(() => {
           this.loading = false;
-        }, 1500)
+        }, 0)
 
         this.notificationService.success(':: Saved Successfully');
       }, error => {

@@ -2,15 +2,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { IzoneName } from '../Model/IzoneName';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ZoneNameService {
-  url =  "http://172.29.29.8:2021/api/ZoneName";
-  url2="https://localhost:44375/api/ZoneName" ;
-  url3 =  "http://172.29.29.8:2031/api/ZoneName";
+  baseUrl = `${environment.apiUrl}ZoneName`;
   constructor(private http: HttpClient) { }
 
   getZoneName(PageNumber :number , PageSize :number , searchValue:string ,sortcolumn:string,sortcolumndir:string){
@@ -22,7 +21,7 @@ export class ZoneNameService {
       params = params.append('sortcolumn' , sortcolumn.toString());
       params = params.append('sortcolumndir' , sortcolumndir.toString());
     }
-    return this.http.get<any>(`${this.url3}`  , {observe:'response' , params}).pipe(
+    return this.http.get<any>(`${this.baseUrl}`  , {observe:'response' , params}).pipe(
       map(response => {
          return response.body ;
       })
@@ -30,25 +29,25 @@ export class ZoneNameService {
   }
 
   getRequests(): Observable<IzoneName[]>{
-    return this.http.get<IzoneName[]>(`${this.url3}/GetZoneName`);
+    return this.http.get<IzoneName[]>(`${this.baseUrl}/GetZoneName`);
   }
   
   insertZoneName(data:IzoneName ):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/AddZoneName`,data);  
+   return this.http.post<any>(`${this.baseUrl}/AddZoneName`,data);  
   }
   
   updateZoneName(data:IzoneName ):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/UpdateZoneName`,data);  
+   return this.http.post<any>(`${this.baseUrl}/UpdateZoneName`,data);  
   }
 
   deleteZoneName(id:number):Observable<any>
   {
-   return this.http.post<any>(`${this.url3}/DeleteZoneName`,id) ; 
+   return this.http.post<any>(`${this.baseUrl}/DeleteZoneName`,id) ; 
   }
   nameIsalreadysign(name:string,id:number ):Observable<any>
   {
-   return this.http.get<any>(`${this.url3}/NameIsAlreadySigned/`+name+`/`+id);  
+   return this.http.get<any>(`${this.baseUrl}/NameIsAlreadySigned/`+name+`/`+id);  
   }
 }

@@ -62,7 +62,7 @@ loader:boolean=false;
 getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
   this.loader = true;
   this.service.getTransmissionMedia(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
-    setTimeout(()=>this.loader = false,2000);
+    setTimeout(()=>this.loader = false,0);
     this.transmssionMedia = response?.data;
     this.transmssionMedia.length = response?.pagination.totalCount;
     this.dataSource = new MatTableDataSource<any>(this.transmssionMedia);
@@ -111,7 +111,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         res => {
           setTimeout(()=>{
             this.loader=false;
-          },1500)
+          },0)
           this.notificationService.success(':: Successfully Added');
           this.LoadTransmissionMedia();
           this.transmssionMediaName = '';
@@ -132,7 +132,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         res => {
           setTimeout(()=>{
             this.loader=false;
-          },1500)
+          },0)
           this.notificationService.success(':: Successfully Updated');
           this.LoadTransmissionMedia();
           this.transmssionMediaName = '';
@@ -181,7 +181,7 @@ this.show=false;
       res => {
         setTimeout(()=>{
           this.loader=false;
-        },1500)
+        },0)
         this.notificationService.success(':: Successfully Updated');
         this.LoadTransmissionMedia();
         this.transmssionMediaName = '';

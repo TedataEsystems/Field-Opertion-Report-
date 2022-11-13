@@ -68,7 +68,7 @@ export class StatusComponent implements OnInit {
       this.dataSource._updateChangeSubscription();
       this.dataSource.paginator = this.paginator as MatPaginator;
     })
-   setTimeout(()=>this.loader = false,2000) ;
+   setTimeout(()=>this.loader = false,0) ;
   }
 
 
@@ -98,7 +98,7 @@ export class StatusComponent implements OnInit {
         res => {
           setTimeout(()=>{
             this.loader=false;
-          },1500)
+          },0)
           this.notificationService.success(':: Successfully Added');
           this.LoadStatus();
           this.statusName = '';
@@ -118,7 +118,7 @@ export class StatusComponent implements OnInit {
         res => {
           setTimeout(()=>{
             this.loader=false;
-          },1500)
+          },0)
           this.notificationService.success(':: Successfully Updated');
           this.LoadStatus();
           this.statusName = '';
@@ -167,7 +167,7 @@ this.show=false;
       res => {
         setTimeout(()=>{
           this.loader=false;
-        },1500)
+        },0)
         this.notificationService.success(':: Successfully Updated');
         this.LoadStatus();
         this.statusName = '';

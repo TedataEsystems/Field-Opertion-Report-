@@ -56,7 +56,7 @@ loader=false;
   applyFilter() {
     this.loader=true;
     this.dataSource.filter = this.searchKey.trim().toLowerCase();
-    setTimeout(()=>  this.loader=false ,2000)
+    setTimeout(()=>  this.loader=false ,0)
    
   }
 

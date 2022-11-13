@@ -69,7 +69,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
     this.dataSource._updateChangeSubscription();
     this.dataSource.paginator = this.paginator as MatPaginator;
   })
-  setTimeout(()=> this.loader = false,2000) ;
+  setTimeout(()=> this.loader = false,0) ;
 }
 
 
@@ -106,7 +106,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         res => {
           setTimeout(()=>{
             this.loader=false;
-          },1500)
+          },0)
           this.notificationService.success(':: Successfully Added');
           this.LoadTechName();
           this.techName = '';
@@ -126,7 +126,7 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
         res => {
           setTimeout(()=>{
             this.loader=false;
-          },1500)
+          },0)
           this.notificationService.success(':: Successfully Updated');
           this.LoadTechName();
           this.techName = '';
@@ -176,7 +176,7 @@ this.show= false;
       res => {
         setTimeout(()=>{
           this.loader=false;
-        },1500)
+        },0)
         this.notificationService.success(':: Successfully Updated');
         this.LoadTechName();
         this.techName = '';
