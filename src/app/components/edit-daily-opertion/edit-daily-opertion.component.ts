@@ -111,7 +111,19 @@ export class EditDailyOpertionComponent implements OnInit {
     this.getformLists();
   }
 
-  
+  OnChangeOperatorName(event :any){
+    let operatorId = Number(event.value);
+    if(operatorId == 29){
+      this.form.patchValue({
+        techNameIds: '1'
+      })
+    }
+    else if(operatorId == 31){
+      this.form.patchValue({
+        techNameIds: '129'
+      })
+    }
+  }
   onOperatorsInputChange(){
     const searchInput = this.operatorSearch.nativeElement.value ?
     this.operatorSearch.nativeElement.value.toLowerCase() : '' ;

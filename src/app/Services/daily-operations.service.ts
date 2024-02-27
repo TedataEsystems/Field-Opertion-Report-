@@ -12,6 +12,7 @@ import { PaginatedResult, Pagination } from '../Model/pagination';
 })
 export class DailyOperationsService {
    baseUrl = `${environment.apiUrl}DailyOperation`;
+   model: IdailyOperationsSearch = <IdailyOperationsSearch>{};
   paginatedResult : PaginatedResult<IdailyOperations[]> =new PaginatedResult<IdailyOperations[]>();
 
   headers = new HttpHeaders({
@@ -21,7 +22,7 @@ export class DailyOperationsService {
 });
   constructor(private http: HttpClient) { }
 
-  getDaily(PageNumber :number , PageSize :number , searchValue:string ,sortcolumn:string,sortcolumndir:string){
+  getDaily(PageNumber :number , PageSize :number , searchValue:string ,sortcolumn:string,sortcolumndir:string ,model:any){
     let params = new HttpParams();
     if(PageNumber !== null && PageSize !== null ){
       params = params.append('pageNumber' , PageNumber.toString());
@@ -31,7 +32,7 @@ export class DailyOperationsService {
       params = params.append('sortcolumndir' , sortcolumndir.toString());
     }
     console.log(this.baseUrl)
-    return this.http.get<any>(`${this.baseUrl}` + '/GetDailyOpertion'  , {observe:'response' , params}).pipe(
+    return this.http.post<any>(`${this.baseUrl}` + '/GetDailyOpertion' , model  , {observe:'response' , params}).pipe(
       map(response => {
          return response.body ;
       })
@@ -87,6 +88,12 @@ ExportExcelWithData():Observable<Blob>{
 
 DownloadAllDisplayDataOfExcel():Observable<Blob>{
   return this.http.get(`${this.baseUrl}/DownloadAllDisplayDataOfExcel`,{responseType: 'blob',headers: this.headers});
+}
+
+DownloadAllFilterationDataOfExcel(model : any):Observable<Blob>{
+  let params = new HttpParams();
+  params = params.append('model' , model);
+  return this.http.post(`${this.baseUrl}/DownloadAllFilterationDataOfExcel`,model,{responseType: 'blob',headers: this.headers});
 }
 
 ExportExcelWithselectData(ids:string[]):Observable<Blob>{

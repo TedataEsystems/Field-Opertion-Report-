@@ -209,12 +209,38 @@ export class AddDailyOperationComponent implements OnInit {
       })
     });
   }
+
+  OnChangeOperatorName(event :any){
+    let operatorId = Number(event.value);
+    if(operatorId == 29){
+      this.form.patchValue({
+        techNameIds: '1'
+      })
+    }
+    else if(operatorId == 31){
+      this.form.patchValue({
+        techNameIds: '129'
+      })
+    }
+  }
   IsBiger : boolean = false;
   handleclosedDateChange(event : any){
     if(this.form.value.createdDate > this.form.value.closedDate){
       this.IsBiger = true;
     }else{
       this.IsBiger = false;
+    }
+  }
+
+  setClosedRequired(event : any){
+    const closedDate = this.form.get('closedDate');
+    if(event.value == "34"){
+      console.log(closedDate)
+      closedDate?.setValidators(Validators.required);
+      closedDate?.updateValueAndValidity();
+    }else{
+      closedDate?.clearValidators();
+      closedDate?.updateValueAndValidity();
     }
   }
 

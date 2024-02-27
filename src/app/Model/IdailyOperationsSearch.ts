@@ -12,7 +12,7 @@ export interface IdailyOperationsSearch{
      zoneName :string;
      operatorId :number;
      assignedTo:string;
-     techNameId: number;
+     techNameId: any;
      remedyActionId: number;
      notes:string;
      transmissionMediaId:number;

@@ -55,7 +55,7 @@
           </mat-form-field>
          
           <mat-form-field>
-            <mat-select class="select"  formControlName="operatorIds" placeholder="operator Name*">
+            <mat-select class="select"  formControlName="operatorIds" placeholder="operator Name*" (selectionChange)="OnChangeOperatorName($event)">
               <input type="text" autocomplete="off" matInput class="p-2" placeholder="Search by name..." #operatorSearch (input)="onOperatorsInputChange()" >
               <ng-container *ngFor="let operatorIds of operators">
                 <mat-option value="{{operatorIds.id}}">{{operatorIds.name}}</mat-option>
@@ -112,9 +112,9 @@
             </mat-select>
             <mat-error>This field is mandatory.</mat-error>
           </mat-form-field>
-
+          <!-- [readonly]="userRole=='FieldOperationReport_User'" -->
           <mat-form-field>
-            <input formControlName="assignedTo" matInput placeholder="AssignedTo*" (keyup)="onChecknameIsValid()" [readonly]="userRole=='FieldOperationReport_User'">
+            <input formControlName="assignedTo" matInput placeholder="AssignedTo*" (keyup)="onChecknameIsValid()">
             <mat-error>This field is mandatory.</mat-error>
             <span class="mat-error" *ngIf="isDisabled">invalid Name</span>
           </mat-form-field>

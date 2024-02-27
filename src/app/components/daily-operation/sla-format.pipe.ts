@@ -9,6 +9,7 @@ export class SlaFormatPipe implements PipeTransform {
  
   transform(value: string): string {
     if(value != null ){
+      debugger
       let sla : string[] = value.split(':' , 3);
       let days = sla[0] ;
       let hours = sla[1];
@@ -20,10 +21,10 @@ export class SlaFormatPipe implements PipeTransform {
         let _hours = hours.concat("h");
         this.finalShow.push(_hours);
       }
-      if(minutes != "00" || minutes == "00"){
-        minutes = "";
-        // let _minutes = minutes.concat("m");
-        this.finalShow.push(minutes);
+      if(minutes != "00"){
+       // minutes = "";
+         let _minutes = minutes.concat("m");
+        this.finalShow.push(_minutes);
       }
       return this.finalShow.join();
     }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -60,8 +60,8 @@ export class DailyOperationComponent implements OnInit {
   selected: string = "";
   loading: boolean = false;
   panelOpenState = false;
-  displayAll: Boolean = false;
-  isFilterationData: Boolean = false;
+  displayAll: boolean = false;
+  isFilterationData: boolean = false;
   pageNumber = 1;
   pageSize = 25;
   pagination?: Pagination;
@@ -98,23 +98,23 @@ export class DailyOperationComponent implements OnInit {
 
   @ViewChild(MatSort) sort?: MatSort;
   @ViewChild(MatPaginator) paginator?: MatPaginator;
-  displayedColumns: string[] = [ 'id','all',  'complaintNumber', 'psdid', 'circuitID', 'customerName', '_PopName',
-    'zoneName', 'createdDate', 'createdTime', 'closedDate', 'closedTime','sla','_OperatorName', 'assignedTo', '_TechName', '_RemedyActionName', 'notes', '_TransmissionMediaName',
-    '_StatusName',   'updateDate', 'createdBy','updatedBy', 'isToLate','flag','action'];
-  dataSource = new MatTableDataSource<any>([]);
+  displayedColumns: string[] = ['id','all','action','complaintNumber','psdid', 'circuitID', 'customerName', '_PopName',
+    'zoneName', 'createdDate', 'createdTime', 'closedDate', 'closedTime','_OperatorName', 'assignedTo', '_TechName', '_RemedyActionName', 'notes', '_TransmissionMediaName',
+    '_StatusName', 'sla',  'updateDate', 'createdBy','updatedBy', 'isToLate','flag'];
+  dataSource = new MatTableDataSource<IdailyOperations>([]);
   getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: string, sortDir: string) {
     this.loader = true;
     if (this.displayAll) {
       this.service.getAllDaily(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
         this.dailyOperations = response?.data as IdailyOperations[];
         this.dailyOperations.length = response?.pagination.totalCount;
-        this.dataSource = new MatTableDataSource<any>(this.dailyOperations);
-      this.dataSource._updateChangeSubscription();
+        this.dataSource = new MatTableDataSource<IdailyOperations>(this.dailyOperations);
+        this.dataSource._updateChangeSubscription();
         this.dataSource.paginator = this.paginator as MatPaginator;
         
       })
     } else {     
-      this.service.getDaily(pageNum, pageSize, search, sortColumn, sortDir).subscribe(response => {
+      this.service.getDaily(pageNum, pageSize, search, sortColumn, sortDir,this.dailyOperationSearch).subscribe(response => {
         this.dailyOperations = response?.data as IdailyOperations[];
         this.dailyOperations.length = response?.pagination.totalCount;
         this.dataSource = new MatTableDataSource<any>(this.dailyOperations);
@@ -140,6 +140,8 @@ export class DailyOperationComponent implements OnInit {
    setTimeout(()=> this.loader = false,0);
   }
   ngOnInit() {
+    debugger;
+    console.log(this.pageNumber);
     this.editUsr = 0;
     this.getRequestdata(1, 25, this.searchData ,  this.sortColumnDef, this.SortDirDef);
   }
@@ -210,36 +212,50 @@ export class DailyOperationComponent implements OnInit {
     this.getRequestdata(this.pageNumber, this.pageSize, this.searchData, this.sortColumnDef, "asc");
   }
   AdvancedSearch() {
+    debugger;
+    console.log(this.pageNumber)
+    console.log(this.pageSize)
    this.isFilterationData = true;
    this.loader=true;
    //setTimeout(()=>this.loader=true ,10000 )
   //  this.loading=true;
     this.togglePanel();
-    this.dailyOperationSearch.complaintNumber = Number(this.form.value.complaintNumber);
-    this.dailyOperationSearch.psdid = Number(this.form.value.PSDID);
-    this.dailyOperationSearch.circuitID = Number(this.form.value.circuitID);
+    this.dailyOperationSearch.complaintNumber = this.form.value.complaintNumber;
+    this.dailyOperationSearch.psdid = this.form.value.PSDID;
+    this.dailyOperationSearch.circuitID = this.form.value.circuitID;
     this.dailyOperationSearch.customerName = this.form.value.customerName;
-    this.dailyOperationSearch.popNameId = Number(this.form.value.popNameIds);
+    this.dailyOperationSearch.popNameId = this.form.value.popNameIds;
     this.dailyOperationSearch.zoneName = this.form.value.zoneName;
     this.dailyOperationSearch.assignedTo = this.form.value.assignedTo;
-    this.dailyOperationSearch.operatorId = Number(this.form.value.operatorIds);
-    this.dailyOperationSearch.techNameId = Number(this.form.value.techNameIds);
-    this.dailyOperationSearch.remedyActionId = Number(this.form.value.remedyActionIds);
+    this.dailyOperationSearch.operatorId = this.form.value.operatorIds;
+    this.dailyOperationSearch.techNameId = this.form.value.techNameIds;
+    this.dailyOperationSearch.remedyActionId = this.form.value.remedyActionIds;
     this.dailyOperationSearch.notes = this.form.value.notes;
-    this.dailyOperationSearch.transmissionMediaId = Number(this.form.value.transmissionMediaIds);
-    this.dailyOperationSearch.statusId = Number(this.form.value.statusIds);
+    this.dailyOperationSearch.transmissionMediaId = this.form.value.transmissionMediaIds;
+    this.dailyOperationSearch.statusId = this.form.value.statusIds;
     this.dailyOperationSearch.createdDateFrom = this.form.value.createdDateFrom == "" ? null : this.form.value.createdDateFrom;
     this.dailyOperationSearch.createdDateTo = this.form.value.createdDateTo == "" ? null : this.form.value.createdDateTo;
     this.dailyOperationSearch.closedDateFrom = this.form.value.closedDateFrom == "" ? null : this.form.value.closedDateFrom;
     this.dailyOperationSearch.closedDateTo = this.form.value.closedDateTo == "" ? null : this.form.value.closedDateTo;
-    this.service.AdvancedSearch(this.dailyOperationSearch).subscribe(res => {
-      this.dailyOperations = res as IdailyOperations[];
-      this.dataSource = new MatTableDataSource(this.dailyOperations);
+    
+    
+    this.service.getDaily(this.pageNumber, this.pageSize, '', '',  this.SortDirDef,this.dailyOperationSearch).subscribe(response => {
+      this.dailyOperations = response?.data as IdailyOperations[];
+      this.dailyOperations.length = response?.pagination.totalCount;
+      this.dataSource = new MatTableDataSource<any>(this.dailyOperations);
+      this.dataSource._updateChangeSubscription();
       this.dataSource.paginator = this.paginator as MatPaginator;
-      this.dataSource.sort = this.sort as MatSort;
-      //this.loader=false;
-      setTimeout(()=>this.loader=false ,0 )
-    });
+      setTimeout(()=> this.loader = false,0);
+    })
+
+    // this.service.AdvancedSearch(this.dailyOperationSearch).subscribe(res => {
+    //   this.dailyOperations = res as IdailyOperations[];
+    //   this.dataSource = new MatTableDataSource(this.dailyOperations);
+    //   this.dataSource.paginator = this.paginator as MatPaginator;
+    //   this.dataSource.sort = this.sort as MatSort;
+    //   //this.loader=false;
+    //   setTimeout(()=>this.loader=false ,0 )
+    // });
 
   }
   //////////////import file
@@ -288,6 +304,10 @@ export class DailyOperationComponent implements OnInit {
   }
 
   ExportTOExcel() {
+    debugger;
+    console.log(this.isall);
+    console.log(this.displayAll);
+    console.log(this.isFilterationData);
     if (this.isall && this.displayAll == false && this.isFilterationData==false) {
       this.service.ExportExcelWithData().subscribe(res => {
 
@@ -316,7 +336,7 @@ export class DailyOperationComponent implements OnInit {
 
       });
     }
-    else if ((this.isall && this.isFilterationData) || (this.isall && this.displayAll && this.isFilterationData)){
+    else if ( (this.isall && this.displayAll && this.isFilterationData)){
       this.service.ExportExcelWithselectData(this.dailyOperations.map(({ id }) => id)).subscribe(res => {
         console.log(this.dailyOperations.map(({ id }) => id));
         const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
@@ -327,6 +347,17 @@ export class DailyOperationComponent implements OnInit {
         err => {
           this.notificationService.warn("! Fail")
         });
+    }
+    else if ((this.isall && this.isFilterationData && this.displayAll == false)){
+      this.service.DownloadAllFilterationDataOfExcel(this.dailyOperationSearch).subscribe(res => {
+        const blob = new Blob([res], { type: 'application/vnd.ms.excel' });
+        const file = new File([blob], 'DailyFieldOperationsReport' + Date.now() + '.xlsx', { type: 'application/vnd.ms.excel' });
+        saveAs(file, 'DailyFieldOperationsReport' + Date.now() + '.xlsx')
+
+      }, err => {
+        this.notificationService.warn("! Fail")
+
+      });
     }
     else {
       if (this.Ids.length == 0) {
@@ -553,11 +584,20 @@ export class DailyOperationComponent implements OnInit {
     });
   }
   clearFields() {
+    this.remedyActionsSearch.nativeElement.value ='';
+    this.operatorSearch.nativeElement.value = '';
+    this.techNameSearch.nativeElement.value='';
+    this.transmissionMediaSearch.nativeElement.value ='';
+    this.statusNameSearch.nativeElement.value='';
+    this.popNameSearch.nativeElement.value ='';
+    this.dailyOperationSearch=<IdailyOperationsSearch>{};
     this.togglePanel() ;
     this.form.reset();
-    this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+    this.pageNumber = 1;
+    this.getRequestdata(this.pageNumber, this.pageSize, '', this.sortColumnDef, this.SortDirDef);
   }
   DisplayAll(checked: any) {
+    debugger
     if (checked.checked) {
       this.isFilterationData==false;
       this.displayAll = checked.checked;
@@ -582,6 +622,7 @@ export class DailyOperationComponent implements OnInit {
   pagesizedef: number = 25;
   public pIn: number = 0;
   pageChanged(event: any) {
+    debugger
     //this.loading = true;
     this.loader=true;
     this.pIn = event.pageIndex;
@@ -615,7 +656,7 @@ export class DailyOperationComponent implements OnInit {
 
       })
     } else {
-      this.service.getDaily(this.pageNumber, this.pageSize, search, this.colname, this.coldir).subscribe(res => {
+      this.service.getDaily(this.pageNumber, this.pageSize, search, this.colname, this.coldir,this.dailyOperationSearch).subscribe(res => {
         if (res.status == true) {
           this.dailyOperations.length = cursize;
           this.dailyOperations.push(...res?.data);

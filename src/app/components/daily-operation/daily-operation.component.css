@@ -280,12 +280,11 @@ mat-cell, mat-header-cell{
   border-bottom:1px solid rgba(0,0,0,.12);
 
  }
- mat-cell:nth-child(6),mat-header-cell:nth-child(6),
- mat-cell:nth-child(18),mat-header-cell:nth-child(18){
+ mat-cell:nth-child(7),mat-header-cell:nth-child(7){
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 18% !important;
-  width: 18% !important;
+  flex: 0 0 16% !important;
+  width: 16% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
 padding: 0 10px !important;
