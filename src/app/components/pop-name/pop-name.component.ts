@@ -190,7 +190,8 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
   editROw(r: any) {
 
     this.editUsr = r.id;
-    this.editdisabled = true;
+    this.zoneNameId=Number(r.zoneNameId)
+    this.editdisabled = false;
 
   }
   updateEdit(row : any) {
@@ -199,14 +200,17 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
     {
       id: row.id,
       name: row.name,
-      zoneNameId: Number(row.zoneNameId),
+      zoneNameId: Number(this.zoneNameId),
     }
+    console.log(popNameEdit,"popname")
     this.service.updatePopName(popNameEdit).subscribe(
       res => {
         setTimeout(()=>{
           this.loader=false;
         },0)
         this.notificationService.success(':: Successfully Updated');
+        this.getRequestdata(1, 25, '', this.sortColumnDef, this.SortDirDef);
+        this.cancelEdit();
         this.LoadPopName();
         this.popName = '';
         this.popNameId = 0;
@@ -214,13 +218,16 @@ getRequestdata(pageNum: number, pageSize: number, search: string, sortColumn: st
       error => { 
         setTimeout(()=>{
           this.loader=false;
+          this.cancelEdit();
         },0)
         this.notificationService.warn(':: An Error Occured') }
     );
-    this.cancelEdit();
+    // this.cancelEdit();
   }
   cancelEdit() {
     this.editdisabled = false;
+    this.editUsr = '';
+    this.zoneNameId=Number('')
     this.isNameUpdatedRepeated=false;
 
   }
